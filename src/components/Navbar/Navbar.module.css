@@ -1,0 +1,16 @@
+.nav {
+    grid-area: n;
+    background-color:bisque
+  }
+  
+  .item {
+    color: white;
+     
+  }
+  a{
+    text-decoration: none;
+    
+  }
+
+  /* Navbar_nav__bCdFm */
+  /* .Navbar_item__GvfCs */
