@@ -1,18 +1,30 @@
+import { type } from 'os';
 import React from 'react';
 import s from './MyPosts.module.css'
 import Post from './Post/Post';
 
-const MyPosts = () => {
+export type MyPostsType = {
+
+}
+const MyPosts = (props:MyPostsType) => {
+
+    let postsData = [
+        { id: '1', message: 'hi, how are you?', likesCount: 0 },
+        { id: '2', message: "it's my first", likesCount: 20 }
+    ]
+
     return (
-        <div>
+        <div className={s.postsBlock}>
             My posts
             <div>
-                <textarea name="textarea"></textarea>
+                <div>
+                    <textarea name="textarea"></textarea>
+                </div>
                 <button>Add Post</button>
             </div>
             <div className={s.posts}>
-            <Post likeCount={0} message = 'hi, how are you?' />
-            <Post likeCount={20} message="it's my first" />
+                <Post likesCount={postsData[0].likesCount} message={postsData[0].message} />
+                <Post likesCount={postsData[1].likesCount} message={postsData[1].message} />
             </div>
         </div>
     )

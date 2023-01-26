@@ -10,17 +10,22 @@ import Profile from './components/Profile/Profile';
 import { Settings } from './components/Settings/Settings';
 
 const App = () => {
+  
+  let postsData = [
+    { id: '1', message: 'hi, how are you?', likesCount: 0 },
+    { id: '2', message: "it's my first", likesCount: 20 }
+]
   return (
     <BrowserRouter>
       <div className='app-wrapper'>
         <Header />
         <Navbar />
         <div className='app-wrapper-content'>
-          <Route path='/dialog' component={Dialogs} />
-          <Route path={'/profile'} component={Profile} />
-          <Route path={'/news'} component={News} />
-          <Route path={'/music'} component={Music} />
-          <Route path={'/settings'} component={Settings} />
+          <Route  path={'/dialogs'} component= {Dialogs} />
+          <Route  path={'/profile'} component={Profile} />
+          <Route  path={'/news'} component={News} />
+          <Route  path={'/music'} component={Music} />
+          <Route  path={'/settings'} component={Settings} />
           {/* <Dialogs /> */}
           {/* <Profile /> */}
 

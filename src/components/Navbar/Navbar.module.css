@@ -1,16 +1,19 @@
 .nav {
-    grid-area: n;
-    background-color:bisque
-  }
-  
-  .item {
-    color: white;
-     
-  }
-  a{
-    text-decoration: none;
-    
-  }
+  grid-area: n;
+  background-color: bisque;
+  padding:20px;
+}
+/* 
+.item {
+  color: white;
+} */
 
-  /* Navbar_nav__bCdFm */
-  /* .Navbar_item__GvfCs */
+.item a {
+  text-decoration: none;
+  color: white;
+}
+
+.item a.active {
+  color: gold;
+}
+
