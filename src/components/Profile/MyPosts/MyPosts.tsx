@@ -1,18 +1,16 @@
-import { type } from 'os';
 import React from 'react';
 import s from './MyPosts.module.css'
-import Post from './Post/Post';
+import Post, { PostType } from './Post/Post';
 
 export type MyPostsType = {
+    posts: PostType[]
 
 }
-const MyPosts = (props:MyPostsType) => {
 
-    let postsData = [
-        { id: '1', message: 'hi, how are you?', likesCount: 0 },
-        { id: '2', message: "it's my first", likesCount: 20 }
-    ]
+const MyPosts = (props: MyPostsType) => {
 
+    let postsElement = props.posts.map((post) => <Post likesCount={post.likesCount} message={post.message} id={post.id} />)
+    
     return (
         <div className={s.postsBlock}>
             My posts
@@ -23,8 +21,7 @@ const MyPosts = (props:MyPostsType) => {
                 <button>Add Post</button>
             </div>
             <div className={s.posts}>
-                <Post likesCount={postsData[0].likesCount} message={postsData[0].message} />
-                <Post likesCount={postsData[1].likesCount} message={postsData[1].message} />
+                {postsElement}
             </div>
         </div>
     )

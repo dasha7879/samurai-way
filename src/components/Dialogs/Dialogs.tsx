@@ -2,54 +2,47 @@ import { type } from '@testing-library/user-event/dist/type';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { text } from 'stream/consumers';
+import { DialogItem } from './DialogItem/DialogItem';
 import s from './Dialogs.module.css'
+import { Message } from './Message/Message';
+import state from '../../redux/state'
+import { PostType } from '../Profile/MyPosts/Post/Post';
 
-type DialogItemType = {
-    name: string;
-    id: string;
-}
-const DialogItem = (props: DialogItemType) => {
-    let path = "/dialogs/" + props.id
-    return (
-        <div className={`${s.dialog} ${s.active}`}>
-            <NavLink to={path}>{props.name}</NavLink>
-        </div>)
+type DialogsType = {
+    state: {
+        dialogsPage: {
+            messages: MessageType[]
+            dialogs: DialogType[]
+        }
+
+    }
+
 }
 
-type MessageType = {
+export type DialogType = {
+    id: string
+    name: string
+}
+
+export type MessageType = {
+    id: string
     textMessage: string
 }
-const Message = (props: MessageType) => {
-    return (
-        <div className={s.message}>{props.textMessage}</div>
-    )
 
-}
 
-export const Dialogs = () => {
+export const Dialogs = (props: DialogsType) => {
 
-    let dialogsData = [
-        { id: '1', name: 'Dima' },
-        { id: '2', name: 'Sveta' },
-        { id: '3', name: 'Victor' },
-        { id: '4', name: 'Valery' }
-    ]
-    let dialogsElement = dialogsData.map(dialog => <DialogItem name={dialog.name} id={dialog.id} />)
+    let dialogsElement = props.state.dialogsPage.dialogs.map(dialog => <DialogItem name={dialog.name} id={dialog.id} />)
 
-    let messagesData = [
-        { id: '1', textMessage: 'Hi' },
-        { id: '2', textMessage: 'You' },
-        { id: '3', textMessage: 'How are you' },
-        { id: '4', textMessage: 'hohoho' }
-    ]
-    let messagesElement = messagesData.map((message)=>{return <Message textMessage={message.textMessage} /> })
+    let messagesElement = props.state.dialogsPage.messages.map((message) => { return <Message textMessage={message.textMessage} /> })
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
                 {dialogsElement}
             </div>
             <div className={s.messages}>
-               {messagesElement}               
+                {messagesElement}
             </div>
         </div>
     )

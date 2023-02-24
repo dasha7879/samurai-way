@@ -4,9 +4,11 @@ import { PostfixUnaryExpression } from 'typescript';
 import s from './Post.module.css'
 
 export type PostType = {
+    id: string
     message: string
     likesCount:number
 }
+
 
 const Post = (props: PostType) => {
     return (
