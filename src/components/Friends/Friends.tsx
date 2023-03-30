@@ -1,20 +1,8 @@
 import React from 'react';
-import s from'./Friends.module.css'
+import { FriendsType } from '../../redux/state';
 
-export type FriendsType = {
-     state: {
-       friends: FriendType[]
-        
-    }
-}
-
-export type FriendType={
-    id:string
-    name:string
-}
-
-export const Friends = (props: FriendsType) => {
-    let friend = props.state.friends.map(friend => <div>{friend.name}</div>)
+export const Friends: React.FC<FriendsType> = (props) => {
+    let friend = props.friends.map(friend => <div>{friend.name}</div>)
     console.log()
     return (
         <div>

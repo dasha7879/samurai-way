@@ -8,7 +8,7 @@ export type DialogItemType = {
     id: string;
 }
 
-export const DialogItem = (props: DialogItemType) => {
+export const DialogItem: React.FC<DialogItemType> = (props) => {
     let path = "/dialogs/" + props.id
     return (
         <div className={`${s.dialog} ${s.active} ${s.item}`}>

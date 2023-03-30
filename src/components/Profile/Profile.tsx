@@ -1,14 +1,10 @@
 import React from 'react';
+import { PostType, PropfileType } from '../../redux/state';
 import MyPosts from './MyPosts/MyPosts';
-import { PostType } from './MyPosts/Post/Post';
-
 import s from './Profile.module.css'
 import { ProfileInfo } from './ProfileInfo/ProfileInfo';
 
- type PropfileType={
-    posts: PostType[]
- }
-const Profile = (props: PropfileType) => {
+const Profile: React.FC<PropfileType> = (props) => {
 
     return (
         <div>

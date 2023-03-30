@@ -1,3 +1,46 @@
+export type MessageType = {
+  id: string
+  textMessage: string
+}
+
+export type DialogType = {
+  id: string
+  name: string
+}
+
+export type PostType = {
+  id: string
+  message: string
+  likesCount: number
+}
+
+export type PropfileType = {
+  posts: PostType[]
+}
+
+export type DialogsType = {
+  messages: MessageType[]
+  dialogs: DialogType[]
+
+}
+export type SidebarType = {}
+
+export type FriendType = {
+  id: string
+  name: string
+}
+
+export type FriendsType = {
+  friends: FriendType[]
+}
+export type RootStateType = {
+  profilePage: PropfileType,
+  dialogsPage: DialogsType,
+  sidebar: SidebarType,
+  friends: FriendsType
+}
+
+
 
 let state = {
   profilePage: {
@@ -23,6 +66,7 @@ let state = {
       { id: '4', name: 'Valery' }
     ]
   },
+  sidebar: {},
 
   friends: [
     { id: '1', name: 'Dima' },
@@ -30,6 +74,11 @@ let state = {
     { id: '3', name: 'Victor' }
   ]
 
+}
+
+export let addPost = (postText: string) => {
+  let newPost: PostType = { id: '5', message: postText, likesCount: 0 }
+  state.profilePage.posts.push(newPost)
 }
 
 export default state
