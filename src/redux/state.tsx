@@ -18,7 +18,7 @@ export type PostType = {
 
 export type PropfileType = {
   posts: PostType[]
-  // addPost: (postText: string)=>void
+  newPostText: string;
 }
 
 export type DialogsType = {
@@ -34,7 +34,7 @@ export type FriendType = {
 }
 
 export type FriendsType = FriendType[]
- 
+
 
 
 export type RootStateType = {
@@ -54,6 +54,7 @@ let state = {
       { id: '3', message: "it's my first", likesCount: 20 },
       { id: '4', message: "it's my first", likesCount: 20 }
     ],
+    newPostText: ''
   },
 
   dialogsPage: {
@@ -80,10 +81,15 @@ let state = {
 
 }
 
-export let addPost = (postText: string) => {
-  let newPost: PostType = { id: '5', message: postText, likesCount: 0 }
-   state.profilePage.posts.push(newPost)
-   rerenderEntiretree(state)
+export let addPost = () => {
+  let newPost: PostType = { id: '5', message: state.profilePage.newPostText, likesCount: 0 }
+  state.profilePage.posts.push(newPost)
+  state.profilePage.newPostText = ''
+  rerenderEntiretree(state)
+}
+export let updateNewPostText = (newText: string) => {
+  state.profilePage.newPostText = newText
+  rerenderEntiretree(state)
 }
 
 export default state

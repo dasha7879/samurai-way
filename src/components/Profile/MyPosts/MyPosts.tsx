@@ -5,7 +5,9 @@ import Post from './Post/Post';
 
 export type MyPostsType = {
     posts: PostType[]
-    callback: (postText: string) => void
+    callback: () => void
+    newPostText:string
+    updateNewPostText:(newText: string)=>void;
 }
 
 const MyPosts: React.FC<MyPostsType> = (props) => {
@@ -14,24 +16,24 @@ const MyPosts: React.FC<MyPostsType> = (props) => {
     let postsElement = props.posts.map((post) => <Post likesCount={post.likesCount} message={post.message} id={post.id} />)
     let newPostElement = React.createRef<HTMLTextAreaElement>();
     let addPostHandler = () => {
-        let text = newPostElement.current?.value
-        // console.log( typeof text)
-        if (text != undefined) {
-            props.callback(text)
-        }
-        if (newPostElement.current !== null) {
-            newPostElement.current.value = ''
-        }
-
-
+            props.callback()
     }
+
+    let onPostChange = () => {
+        let text = newPostElement.current?.value
+        if (text != undefined) {
+            props.updateNewPostText(text)
+        }
+    }
+
+
 
     return (
         <div className={s.postsBlock}>
             My posts
             <div>
                 <div>
-                    <textarea name="textarea" ref={newPostElement}></textarea>
+                    <textarea  onChange={onPostChange} name="textarea" ref={newPostElement} value ={props.newPostText}/>
                 </div>
                 <button onClick={addPostHandler}>Add Post</button>
             </div>
