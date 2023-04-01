@@ -5,25 +5,35 @@ import Post from './Post/Post';
 
 export type MyPostsType = {
     posts: PostType[]
-
+    callback: (postText: string) => void
 }
 
 const MyPosts: React.FC<MyPostsType> = (props) => {
 
+
     let postsElement = props.posts.map((post) => <Post likesCount={post.likesCount} message={post.message} id={post.id} />)
     let newPostElement = React.createRef<HTMLTextAreaElement>();
-    let addPost = () =>{
+    let addPostHandler = () => {
         let text = newPostElement.current?.value
-        alert(text)
+        // console.log( typeof text)
+        if (text != undefined) {
+            props.callback(text)
+        }
+        if (newPostElement.current !== null) {
+            newPostElement.current.value = ''
+        }
+
+
     }
+
     return (
         <div className={s.postsBlock}>
             My posts
             <div>
                 <div>
-                    <textarea name="textarea" ref = {newPostElement}></textarea>
+                    <textarea name="textarea" ref={newPostElement}></textarea>
                 </div>
-                <button onClick={addPost}>Add Post</button>
+                <button onClick={addPostHandler}>Add Post</button>
             </div>
             <div className={s.posts}>
                 {postsElement}

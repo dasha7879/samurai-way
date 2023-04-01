@@ -9,11 +9,15 @@ import Navbar from './components/Navbar/Navbar';
 import { News } from './components/News/News';
 import Profile from './components/Profile/Profile';
 import { Settings } from './components/Settings/Settings';
-import  state, { RootStateType } from  './redux/state'
+import  state, { RootStateType }  from  './redux/state'
 
+export type AppStateType={
+  state:RootStateType;
+  addPost:(postText: string)=>void
+}
 
-const App = () => {
-let friends = state.friends
+export const App = (props:AppStateType) => {
+// let friends = state.friends
 let messages = state.dialogsPage.messages
 let posts = state.profilePage.posts
 let dialogs= state.dialogsPage.dialogs
@@ -28,10 +32,8 @@ let dialogs= state.dialogsPage.dialogs
           <Route path={'/news'} render={() => <News />} />
           <Route path={'/music'} render={() => <Music />} />
           <Route path={'/settings'} render={() => <Settings />} />
-          <Route path={'/friends'} render={() => <Friends friends= {friends} />} />
-          {/* <Dialogs /> */}
-          {/* <Profile /> */}
-
+          <Route path={'/friends'} render={() => <Friends />} />
+          
         </div>
       </div>
     </BrowserRouter>

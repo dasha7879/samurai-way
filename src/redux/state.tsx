@@ -1,3 +1,5 @@
+import { rerenderEntiretree } from "../render"
+
 export type MessageType = {
   id: string
   textMessage: string
@@ -16,6 +18,7 @@ export type PostType = {
 
 export type PropfileType = {
   posts: PostType[]
+  // addPost: (postText: string)=>void
 }
 
 export type DialogsType = {
@@ -30,9 +33,10 @@ export type FriendType = {
   name: string
 }
 
-export type FriendsType = {
-  friends: FriendType[]
-}
+export type FriendsType = FriendType[]
+ 
+
+
 export type RootStateType = {
   profilePage: PropfileType,
   dialogsPage: DialogsType,
@@ -78,7 +82,8 @@ let state = {
 
 export let addPost = (postText: string) => {
   let newPost: PostType = { id: '5', message: postText, likesCount: 0 }
-  state.profilePage.posts.push(newPost)
+   state.profilePage.posts.push(newPost)
+   rerenderEntiretree(state)
 }
 
 export default state
