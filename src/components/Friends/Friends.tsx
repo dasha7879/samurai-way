@@ -1,8 +1,9 @@
 import React from 'react';
-import state  from '../../redux/state';
+import store from '../../redux/state';
+
 
 export const Friends= () => {
-    let friend = state.friends.map(friend => <div>{friend.name}</div>)
+    let friend = store._state.friends.map(friend => <div>{friend.name}</div>)
     console.log()
     return (
         <div>

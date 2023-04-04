@@ -1,15 +1,21 @@
 import React from 'react';
-import {PropfileType, addPost, updateNewPostText } from '../../redux/state';
+import {ActionsType, PostType} from '../../redux/state';
 import MyPosts from './MyPosts/MyPosts';
 import s from './Profile.module.css'
 import { ProfileInfo } from './ProfileInfo/ProfileInfo';
 
-const Profile: React.FC<PropfileType> = (props) => {
+
+ type ProfilePropsType = {
+    posts: PostType[]
+    dispatch :(action: ActionsType)=>void
+    newPostText: string
+}
+const Profile: React.FC<ProfilePropsType> = (props) => {
 
     return (
         <div>
             <ProfileInfo />
-            <MyPosts posts={props.posts} callback={addPost} newPostText={props.newPostText}  updateNewPostText = {updateNewPostText} />
+            <MyPosts posts={props.posts} newPostText={props.newPostText}  dispatch={props.dispatch} />
         </div>
     )
 

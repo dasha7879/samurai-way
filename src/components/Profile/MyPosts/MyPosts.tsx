@@ -1,14 +1,17 @@
 import React from 'react';
-import { PostType } from '../../../redux/state';
+import store, { ActionsType, PostType, addPostAC, updatePostAC} from '../../../redux/state';
 import s from './MyPosts.module.css'
 import Post from './Post/Post';
+import { type } from 'os';
+
+
 
 export type MyPostsType = {
-    posts: PostType[]
-    callback: () => void
+    posts: PostType[],
+    dispatch :(action: ActionsType)=>void,
     newPostText:string
-    updateNewPostText:(newText: string)=>void;
 }
+
 
 const MyPosts: React.FC<MyPostsType> = (props) => {
 
@@ -16,13 +19,16 @@ const MyPosts: React.FC<MyPostsType> = (props) => {
     let postsElement = props.posts.map((post) => <Post likesCount={post.likesCount} message={post.message} id={post.id} />)
     let newPostElement = React.createRef<HTMLTextAreaElement>();
     let addPostHandler = () => {
-            props.callback()
+            // props.dispatch(store._state.profilePage.newPostText)
+            // props.dispatch({type:'ADD-POST', newPostText: store._state.profilePage.newPostText})
+            props.dispatch(addPostAC())
     }
 
     let onPostChange = () => {
         let text = newPostElement.current?.value
         if (text != undefined) {
-            props.updateNewPostText(text)
+            // props.dispatch({type:'UPDATE-NEW-POST-TEXT', newText: text})
+            props.dispatch(updatePostAC(text))
         }
     }
 

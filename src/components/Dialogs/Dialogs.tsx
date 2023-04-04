@@ -1,35 +1,38 @@
-import { type } from '@testing-library/user-event/dist/type';
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { text } from 'stream/consumers';
 import { DialogItem } from './DialogItem/DialogItem';
 import s from './Dialogs.module.css'
 import { Message } from './Message/Message';
-import state, { DialogsType, DialogType, MessageType } from '../../redux/state'
+import store, {ActionsType,DialogType, MessageType, addMessageAC, changeMessageAC} from '../../redux/state'
+import { change } from 'redux-form';
 
-// type DialogsType = {
-//     state: {
-//         dialogsPage: {
-//             messages: MessageType[]
-//             dialogs: DialogType[]
-//         }
-//     }
-// }
+type DialogsPropsType = {
+    messages: MessageType[]
+    dialogs: DialogType[]
+    dispatch :(action: ActionsType)=>void
+    newMessageText: string
+  }
 
-
-
-
-export const Dialogs: React.FC<DialogsType> = (props) => {
+export const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
     let dialogsElement = props.dialogs.map(dialog => <DialogItem name={dialog.name} id={dialog.id} />)
 
     let messagesElement = props.messages.map((message) => { return <Message textMessage={message.textMessage} /> })
      
     let newMessage = React.createRef<HTMLTextAreaElement>()
+
      let addMessage = ()=>{
-        let messageText = newMessage.current?.value
-        alert(messageText)
+    //    props.dispatch({type:'ADD-MESSAGE', newMesssageText:store._state.dialogsPage.newMessageText})
+       props.dispatch(addMessageAC())
      }
+
+     let onMessageChange = () => {
+        let messageText = newMessage.current?.value
+        if (messageText != undefined) {
+            // props.dispatch({type:'CHANGE-MESSAGE', newMesssageText:messageText})
+            props.dispatch(changeMessageAC(messageText))
+        }   
+        
+    }
     return (
 
         <div className={s.dialogs}>
@@ -41,7 +44,7 @@ export const Dialogs: React.FC<DialogsType> = (props) => {
             </div>
              <div>
                 <div>
-                    <textarea name="textarea" ref = {newMessage}></textarea>
+                    <textarea onChange={onMessageChange} name="textarea" ref = {newMessage}></textarea>
                 </div>
                 <button onClick={addMessage}>Add message</button>
             </div>

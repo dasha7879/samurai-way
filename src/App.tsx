@@ -9,27 +9,26 @@ import Navbar from './components/Navbar/Navbar';
 import { News } from './components/News/News';
 import Profile from './components/Profile/Profile';
 import { Settings } from './components/Settings/Settings';
-import state, { RootStateType, updateNewPostText } from './redux/state'
+import state, { ActionsType, RootStateType} from './redux/state'
+import store from './redux/state';
 
 export type AppStateType = {
   state: RootStateType;
-  addPost: (postText: string) => void
-  updateNewPostText: (newText: string) => void
+  dispatch:(action: ActionsType)=>void
 }
 
 export const App = (props: AppStateType) => {
-  // let friends = state.friends
-  let messages = state.dialogsPage.messages
-  let posts = state.profilePage.posts
-  let dialogs = state.dialogsPage.dialogs
+  let messages = store._state.dialogsPage.messages
+  let posts = store._state.profilePage.posts
+  let dialogs = store._state.dialogsPage.dialogs
   return (
     <BrowserRouter>
       <div className='app-wrapper'>
         <Header />
         <Navbar />
         <div className='app-wrapper-content'>
-          <Route path={'/dialogs'} render={() => <Dialogs messages={messages} dialogs={dialogs} />} />
-          <Route path={'/profile'} render={() => <Profile posts={posts} newPostText={props.state.profilePage.newPostText}/>} />
+          <Route path={'/dialogs'} render={() => <Dialogs messages={messages} dialogs={dialogs} newMessageText={props.state.dialogsPage.newMessageText} dispatch = {props.dispatch} />} />
+          <Route path={'/profile'} render={() => <Profile posts={posts} newPostText={props.state.profilePage.newPostText} dispatch = {props.dispatch}/>} />
           <Route path={'/news'} render={() => <News />} />
           <Route path={'/music'} render={() => <Music />} />
           <Route path={'/settings'} render={() => <Settings />} />
