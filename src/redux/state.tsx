@@ -39,12 +39,16 @@ export type RootStateType = {
   friends: FriendsType
 }
 
-export type AddPostType = ReturnType<typeof addPostAC>
+export type storeType = {
+  _state:RootStateType
+  getState: ()=> RootStateType
+  subscribe:(observer: ()=>void )=>void
+  rerenderEntiretree: ()=>void
+  dispatch: (action: ActionsType)=>void
+}
 
-// export type UpdatePostType = {
-//   type: 'UPDATE-NEW-POST-TEXT'
-//   newText: string
-// }
+
+export type AddPostType = ReturnType<typeof addPostAC>
 export type UpdatePostType = ReturnType<typeof updatePostAC>
 export type ChangeMessageType = ReturnType<typeof changeMessageAC>
 export type AddMessageType = ReturnType<typeof addMessageAC>
@@ -64,7 +68,7 @@ export const addMessageAC = () => {
   return { type:  ADD_MESSAGE} as const
 }
 export const changeMessageAC = (newMesssageText:string) => {
-  return { type: CHANGE_MESSAGE , newMesssageText:newMesssageText } as const
+  return { type: CHANGE_MESSAGE , newMesssageText } as const
 }
 
 let store = {
@@ -118,6 +122,9 @@ let store = {
       this.rerenderEntiretree()
 
     } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+      console.log(action)
+      console.log(this)
+      console.log(this._state)
       this._state.profilePage.newPostText = action.newText
       this.rerenderEntiretree()
 
