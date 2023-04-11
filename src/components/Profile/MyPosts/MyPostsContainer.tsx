@@ -3,22 +3,31 @@ import MyPosts from './MyPosts';
 import { connect } from 'react-redux';
 import { RootStateType } from '../../../redux/reduxStore';
 import { Dispatch } from 'redux';
+import { PostType } from '../../../redux/store';
+
+type mapStateToPropsType ={
+    posts:PostType[]
+    newPostText: string
+}
+type mapDispatchToPropsType = {
+    onPostChange:(text: string)=>void
+    addPostHandler:()=>void
+
+}
+
+export type MyPostsType = mapStateToPropsType & mapDispatchToPropsType
 
 let mapStateToProps = (state: RootStateType) => {
     return {
-        profilePage: state.profilePage.posts,
+        posts: state.profilePage.posts,
         newPostText: state.profilePage.newPostText
     }
 
 }
 let mapDispatchToProps = (dispatch: Dispatch) => {
     return {
-        onPostChange: (text: string) => {
-            let action = updatePostAC(text)
-            dispatch(action)
-        },
-        addPostHandler: () => { dispatch(addPostAC()) }
-
+        onPostChange: (text: string) => dispatch(updatePostAC(text)) ,
+        addPostHandler: () => dispatch(addPostAC()) 
     }
 
 }

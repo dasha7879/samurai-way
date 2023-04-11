@@ -24,7 +24,7 @@ export const App = () => {
         <Navbar />
         <div className='app-wrapper-content'>
           <Route path={'/dialogs'} render={() => <DialogsContainer state={store.getState().dialogsPage.dialogs}/>}/>
-          <Route path={'/profile'} render={() => <Profile posts={store.getState().profilePage.posts} newPostText={store.getState().profilePage.newPostText} />} />
+          <Route path={'/profile'} render={() => <Profile />} />
           <Route path={'/news'} render={() => <News />} />
           <Route path={'/music'} render={() => <Music />} />
           <Route path={'/settings'} render={() => <Settings />} />

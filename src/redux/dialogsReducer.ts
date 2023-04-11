@@ -29,7 +29,8 @@ export const dialogsReducer = (state = initialState , action: ActionsType):Dialo
         case 'CHANGE-MESSAGE':
             return {...state, newMessageText: action.newMesssageText}
         default:
-            throw new Error("I don't understand this type")
+        
+            return state 
     }
 }
 

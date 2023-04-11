@@ -17,14 +17,13 @@ let initialState: PropfileType = {
 export const profileReducer = (state = initialState, action: ActionsType ): PropfileType => {
     switch(action.type){
         case ADD_POST: 
+        debugger
         let newPost: PostType = { id: '5', message: state.newPostText, likesCount: 0 }
         return {...state, posts:[...state.posts,newPost]};
         case UPDATE_NEW_POST_TEXT: 
         return {...state, newPostText: action.newText}
         default:
-            //  throw new Error("I don't understand this type")
             return state
-
     }
    
 }

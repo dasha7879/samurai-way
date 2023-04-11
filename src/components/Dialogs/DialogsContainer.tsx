@@ -1,4 +1,4 @@
-import  { Dispatch } from 'react';
+import  { Dispatch } from 'redux';
 import { addMessageAC, changeMessageAC } from '../../redux/dialogsReducer';
 import  { RootStateType } from '../../redux/reduxStore';
 import { Dialogs } from './Dialogs';
@@ -12,7 +12,7 @@ let mapStateToProps = (state: RootStateType) => {
     }
 
 }
-let mapDispatchToProps = (dispatch: Dispatch<any>) => { //fix any
+let mapDispatchToProps = (dispatch: Dispatch) => {
     return {
         addMessage: () => {
             dispatch(addMessageAC())
