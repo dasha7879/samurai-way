@@ -1,15 +1,16 @@
-import React, { ChangeEvent, useRef } from 'react';
-import store, { ActionsType, PostType, addPostAC, updatePostAC } from '../../../redux/state';
+import React, { ChangeEvent } from 'react';
+import  {PostType } from '../../../redux/store';
 import s from './MyPosts.module.css'
 import Post from './Post/Post';
-import { type } from 'os';
 
 
 
 export type MyPostsType = {
     posts: PostType[],
-    dispatch: (action: ActionsType) => void,
     newPostText: string
+    onPostChange: (text:string)=> void
+    addPostHandler:()=>void
+    
 }
 
 
@@ -19,13 +20,13 @@ const MyPosts: React.FC<MyPostsType> = (props) => {
     let postsElement = props.posts.map((post) => <Post likesCount={post.likesCount} message={post.message} id={post.id} />)
 
     let addPostHandler = () => {
-        props.dispatch(addPostAC())
+        props.addPostHandler()
     }
 
     let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         const text = e.currentTarget.value
         if (text != undefined) {
-            props.dispatch(updatePostAC(text))
+            props.onPostChange(text)
         }
     }
 

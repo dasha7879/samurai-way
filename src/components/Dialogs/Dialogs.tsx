@@ -1,32 +1,36 @@
 import React, { ChangeEvent } from 'react';
 import { DialogItem } from './DialogItem/DialogItem';
 import s from './Dialogs.module.css'
+// import { Message } from './Message/Message';
+// import { addMessageAC, changeMessageAC } from '../../redux/dialogsReducer';
+import { DialogType} from '../../redux/store';
+import store from '../../redux/reduxStore';
 import { Message } from './Message/Message';
-import store, {ActionsType, DialogsType,addMessageAC, changeMessageAC} from '../../redux/state'
 
 type DialogsPropsType = {
-    dispatch:(action: ActionsType)=>void
-    state: DialogsType
-    // newMessageText: string
+    state: DialogType[]
+    updateMessageText:(messageText:string)=>void
+    addMessage :()=>void
   }
 
 
 
 export const Dialogs: React.FC<DialogsPropsType> = (props:DialogsPropsType) => {
+    
+    let state = store.getState().dialogsPage
+    // let state = store.getState().dialogsPage
 
-    let dialogsElement = props.state.dialogs.map(dialog => <DialogItem name={dialog.name} id={dialog.id} />)
+    let dialogsElement = state.dialogs.map(dialog => <DialogItem name={dialog.name} id={dialog.id} />) // подумать как сделать так, чтобы она не взаимодействовала со стейтом
+    let messagesElement =  state.messages.map((message) => { return <Message textMessage={message.textMessage} /> })
+    let newMessage = state.newMessageText
 
-    let messagesElement = props.state.messages.map((message) => { return <Message textMessage={message.textMessage} /> })
-     
-    let newMessage = props.state.newMessageText;
-
-     let addMessage = ()=>{
-       store.dispatch(addMessageAC())
-     }
-
-     let onMessageChange = (e:ChangeEvent<HTMLTextAreaElement>) => {
+    let addMessage = () => {
+        props.addMessage()
+    }
+     let updateMessageText = (e:ChangeEvent<HTMLTextAreaElement>) => {
         let messageText = e.target.value
-        props.dispatch(changeMessageAC(messageText))
+        props.updateMessageText(messageText)
+        // props.dispatch(changeMessageAC(messageText))
         
     }
     return (
@@ -40,10 +44,11 @@ export const Dialogs: React.FC<DialogsPropsType> = (props:DialogsPropsType) => {
             </div>
              <div>
                 <div>
-                    <textarea onChange={onMessageChange} value = {newMessage } name="textarea" placeholder='Enter your message'></textarea>
+                    <textarea onChange={updateMessageText} value = {newMessage } name="textarea" placeholder='Enter your message'></textarea>
                 </div>
                 <button onClick={addMessage}>Add message</button>
             </div>
         </div>
     )
 }
+

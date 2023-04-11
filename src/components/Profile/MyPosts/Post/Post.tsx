@@ -1,7 +1,7 @@
 import { OmitProps } from 'antd/lib/transfer/ListBody';
 import React from 'react';
 import { PostfixUnaryExpression } from 'typescript';
-import { PostType } from '../../../../redux/state';
+import { PostType } from '../../../../redux/store';
 import s from './Post.module.css'
 
 

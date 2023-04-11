@@ -1,14 +1,16 @@
  import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import store, { RootStateType } from './redux/state';
+import store from './redux/reduxStore';
+import { Provider } from 'react-redux';
 
- let rerenderEntiretree =   
-  (state:RootStateType) => {
+
+ 
   ReactDOM.render(
-    <App state={state} dispatch = {store.dispatch.bind(store)}/>, document.getElementById('root')
+    <Provider store={store}>
+      <App />,
+    </Provider>,
+     document.getElementById('root')
   );
-}
 
-rerenderEntiretree(store.getState())
-store.subscribe(()=>{rerenderEntiretree(store.getState())})
+
