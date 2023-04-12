@@ -1,16 +1,16 @@
-export {}
-
-// import React from 'react';
-// import store from '../../redux/reduxStore';
+import { FriendsPropsType } from './FriendsContainer';
 
 
 
-// export const Friends= () => {
-//     let friend = store.getState().friends.map(friend => <div>{friend.name}</div>)
-//     console.log()
-//     return (
-//         <div>
-//             {friend}
-//         </div>
-//         )
-// }
+export const Friends: React.FC<FriendsPropsType> = (props) => {
+    let friend = props.friendsPage.map(friend => <div>{friend.name}</div>)
+    let addFriend = () => {
+        props.addFriend()
+    }
+    return (
+        <div>
+            {friend}
+            <button onClick={addFriend}>Add friend</button>
+        </div>
+    )
+}

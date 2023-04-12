@@ -1,4 +1,3 @@
-import { type } from '@testing-library/user-event/dist/type';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import s from './../Dialogs.module.css'

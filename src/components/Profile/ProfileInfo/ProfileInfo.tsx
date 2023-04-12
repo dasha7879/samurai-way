@@ -1,4 +1,3 @@
-import React from 'react';
 import s from './ProfileInfo.module.css'
 
 export const ProfileInfo = () => {
@@ -12,7 +11,6 @@ export const ProfileInfo = () => {
                 <img src="" alt="" />
             </div>
         </div>
-
     )
 
 }

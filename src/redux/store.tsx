@@ -1,5 +1,5 @@
 import { AddMessageType, ChangeMessageType } from "./dialogsReducer";
-import { AddPostType, UpdatePostType, profileReducer } from "./profileReducer";
+import { AddPostType, UpdatePostType} from "./profileReducer";
 
 
 export type MessageType = {
@@ -25,6 +25,7 @@ export type DialogsType = {
   newMessageText: string
 }
 export type SidebarType = {}
+
 export type FriendType = {
   id: string
   name: string

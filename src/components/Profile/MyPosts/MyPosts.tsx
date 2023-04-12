@@ -3,11 +3,7 @@ import s from './MyPosts.module.css'
 import Post from './Post/Post';
 import { MyPostsType } from './MyPostsContainer';
 
-
-
-
 const MyPosts: React.FC<MyPostsType> = (props) => {
-
 
     let postsElement = props.posts.map((post) => <Post likesCount={post.likesCount} message={post.message} id={post.id} />)
 
@@ -21,8 +17,6 @@ const MyPosts: React.FC<MyPostsType> = (props) => {
             props.onPostChange(text)
         }
     }
-
-
 
     return (
         <div className={s.postsBlock}>
@@ -38,6 +32,5 @@ const MyPosts: React.FC<MyPostsType> = (props) => {
             </div>
         </div>
     )
-
 }
 export default MyPosts;
