@@ -12,8 +12,8 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
     let messagesElement = state.messages.map((message) => { return <Message id={message.id} textMessage={message.textMessage} /> })
     let newMessage = state.newMessageText;
 
-    let addMessage = () => {
-        props.addMessage()
+    let sendMessage = () => {
+        props.sendMessage()
     }
     let updateMessageText = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let messageText = e.target.value
@@ -33,7 +33,7 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
                 <div>
                     <textarea onChange={updateMessageText} value={newMessage} name="textarea" placeholder='Enter your message'></textarea>
                 </div>
-                <button onClick={addMessage}>Add message</button>
+                <button onClick={sendMessage}>Send Message</button>
             </div>
         </div>
     )

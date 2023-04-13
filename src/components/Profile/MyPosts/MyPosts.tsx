@@ -5,7 +5,7 @@ import { MyPostsType } from './MyPostsContainer';
 
 const MyPosts: React.FC<MyPostsType> = (props) => {
 
-    let postsElement = props.posts.map((post) => <Post likesCount={post.likesCount} message={post.message} id={post.id} />)
+    let postsElement = props.posts.map((post) => <Post key={post.id} likesCount={post.likesCount} message={post.message} id={post.id} />)
 
     let addPostHandler = () => {
         props.addPostHandler()

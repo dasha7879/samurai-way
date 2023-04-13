@@ -3,7 +3,12 @@ import MyPosts from './MyPosts';
 import { connect } from 'react-redux';
 import { RootStateType } from '../../../redux/reduxStore';
 import { Dispatch } from 'redux';
-import { PostType } from '../../../redux/store';
+
+type PostType = {
+    id: string
+    message: string
+    likesCount: number
+  }
 
 type mapStateToPropsType ={
     posts:PostType[]

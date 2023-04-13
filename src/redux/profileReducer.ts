@@ -1,8 +1,12 @@
-import { PostType, PropfileType } from "./store";
+import { PostType } from "../components/Profile/MyPosts/Post/Post";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 
+type PropfileType = {
+  posts: PostType[]
+  newPostText: string;
+}
 
 let initialState: PropfileType = {
   posts: [

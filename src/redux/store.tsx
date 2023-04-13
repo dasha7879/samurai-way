@@ -1,46 +1,52 @@
-import { AddMessageType, ChangeMessageType } from "./dialogsReducer";
+import { ChangeMessageType, SendMessageType } from "./dialogsReducer";
 import { AddPostType, UpdatePostType} from "./profileReducer";
 
 
-export type MessageType = {
+ type MessageType = {
   id: string
   textMessage: string
 }
-export type DialogType = {
+type DialogType = {
   id: string
   name: string
 }
-export type PostType = {
+ type PostType = {
   id: string
   message: string
   likesCount: number
 }
-export type PropfileType = {
+ type PropfileType = {
   posts: PostType[]
   newPostText: string;
 }
-export type DialogsType = {
+ type DialogsType = {
   messages: MessageType[]
   dialogs: DialogType[],
   newMessageText: string
 }
-export type SidebarType = {}
+ type SidebarType = {}
 
-export type FriendType = {
+ type UserType = {
   id: string
-  name: string
+  followed:boolean
+  fullName: string
+  status: string
+  location:{
+    country:string
+    city:string
+  }
 }
-export type FriendsType = FriendType[]
+//  type UsersType = {users:UserType[]}
 
 
-// export type RootStateType = {
+//  type RootStateType = {
 //   profilePage: PropfileType,
 //   dialogsPage: DialogsType,
 //   sidebar: SidebarType,
 //   friends: FriendsType
 // }
 
-// export type storeType = {
+//  type storeType = {
 //   // _state:RootStateType
 //   // getState: ()=> RootStateType
 //   subscribe:(observer: ()=>void )=>void
@@ -48,7 +54,7 @@ export type FriendsType = FriendType[]
 //   dispatch: (action: ActionsType)=>void
 // }
 
-export type ActionsType =  ChangeMessageType | AddMessageType |AddPostType | UpdatePostType
+ type ActionsType =  ChangeMessageType | SendMessageType |AddPostType | UpdatePostType
 
 
 // let store = {
@@ -109,7 +115,7 @@ export type ActionsType =  ChangeMessageType | AddMessageType |AddPostType | Upd
 
 // const win: any = window
 // win.store = store;
-// export default store
+//  export default store
 
 
 

@@ -1,6 +1,6 @@
 import s from './ProfileInfo.module.css'
 
-export const ProfileInfo = () => {
+export const ProfileInfo: React.FC = () => {
     return (
         <div className='profileInfo'>
             <div>

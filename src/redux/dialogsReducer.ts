@@ -1,7 +1,18 @@
-import { DialogsType, MessageType } from "./store";
+import { MessageType } from "../components/Dialogs/Message/Message";
 
-const ADD_MESSAGE = 'ADD-MESSAGE';
+const SEND_MESSAGE = 'SEND-MESSAGE';
 const CHANGE_MESSAGE = 'CHANGE-MESSAGE';
+
+type DialogsType = {
+    messages: MessageType[]
+    dialogs: DialogType[],
+    newMessageText: string
+  }
+
+  type DialogType = {
+    id: string
+    name: string
+  }
 
 let initialState: DialogsType = {
     messages: [
@@ -21,10 +32,10 @@ let initialState: DialogsType = {
 export const dialogsReducer = (state = initialState, action: ActionsType): DialogsType => {
 
     switch (action.type) {
-        case 'ADD-MESSAGE':
+        case SEND_MESSAGE:
             let newMessage: MessageType = { id: '5', textMessage: state.newMessageText }
             return { ...state, messages: [...state.messages, newMessage], newMessageText: "" }
-        case 'CHANGE-MESSAGE':
+        case CHANGE_MESSAGE:
             return { ...state, newMessageText: action.newMesssageText }
         default:
 
@@ -32,14 +43,14 @@ export const dialogsReducer = (state = initialState, action: ActionsType): Dialo
     }
 }
 
-export type ActionsType = ChangeMessageType | AddMessageType
+export type ActionsType = ChangeMessageType | SendMessageType
 
 export type ChangeMessageType = ReturnType<typeof changeMessageAC>
-export type AddMessageType = ReturnType<typeof addMessageAC>
+export type SendMessageType = ReturnType<typeof sendMessageAC>
 
 
-export const addMessageAC = () => {
-    return { type: ADD_MESSAGE } as const
+export const sendMessageAC = () => {
+    return { type: SEND_MESSAGE } as const
 }
 export const changeMessageAC = (newMesssageText: string) => {
     return { type: CHANGE_MESSAGE, newMesssageText } as const

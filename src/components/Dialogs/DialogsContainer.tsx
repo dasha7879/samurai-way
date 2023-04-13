@@ -1,17 +1,30 @@
 import { Dispatch } from 'redux';
-import { addMessageAC, changeMessageAC } from '../../redux/dialogsReducer';
+import { sendMessageAC, changeMessageAC } from '../../redux/dialogsReducer';
 import { RootStateType } from '../../redux/reduxStore';
 import { Dialogs } from './Dialogs';
 import { connect } from 'react-redux';
-import { DialogsType } from '../../redux/store';
 
+type MessageType = {
+    id: string
+    textMessage: string
+}
+
+type DialogType = {
+    id: string
+    name: string
+}
+type DialogsType = {
+    messages: MessageType[]
+    dialogs: DialogType[],
+    newMessageText: string
+}
 
 type mapStateToPropsType = {
     dialogsPage: DialogsType
 }
 
 type mapDispatchToPropsType = {
-    addMessage: () => void,
+    sendMessage: () => void,
     updateMessageText: (messageText: string) => void
 }
 
@@ -25,8 +38,8 @@ let mapStateToProps = (state: RootStateType) => {
 
 let mapDispatchToProps = (dispatch: Dispatch) => {
     return {
-        addMessage: () => {
-            dispatch(addMessageAC())
+        sendMessage: () => {
+            dispatch(sendMessageAC())
         },
         updateMessageText: (messageText: string) => {
             dispatch(changeMessageAC(messageText))
