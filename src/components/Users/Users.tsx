@@ -1,26 +1,27 @@
+import axios from "axios"
 import { UsersPropsType } from "./UsersContainer"
 import s from './users.module.css'
+import userPhoto from '../../assets/images/User-Profile-PNG-High-Quality-Image.png'
 
 
 export const Users: React.FC<UsersPropsType> = (props) => {
-if(props.usersPage.users.length=== 0){
-    props.setUsers([
-        { id: '1', photoUrl: 'https://avatarzo.ru/wp-content/uploads/squid-game-anime.jpg', followed: false, fullName: 'Dima', status: 'i am DDD', location: { country: 'Belarus', city: 'Minsk' } },
-        { id: '2', photoUrl: 'https://avatarzo.ru/wp-content/uploads/squid-game-anime.jpg', followed: true, fullName: 'Daha', status: 'i am DDD', location: { country: 'Belarus', city: 'Minsk' } },
-        { id: '3', photoUrl: 'https://avatarzo.ru/wp-content/uploads/squid-game-anime.jpg', followed: false, fullName: 'Valya', status: 'i am DDD', location: { country: 'Belarus', city: 'Minsk' } },
-        { id: '4', photoUrl: 'https://avatarzo.ru/wp-content/uploads/squid-game-anime.jpg', followed: true, fullName: 'Pasha', status: 'i am DDD', location: { country: 'Belarus', city: 'Minsk' } }
-    ]
-    )
-}
-   
+    if (props.usersPage.users.length === 0) {
+        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+            debugger;
+            props.setUsers(response.data.items)
+        }
+        )
+    }
 
+    
     return (
         <div>
             {
                 props.usersPage.users.map(user => <div key={user.id}>
                     <span>
                         <div>
-                            <img className={s.userPhoto} src={user.photoUrl} alt="" />
+
+                            <img className={s.userPhoto} src={user.photos.small != null ? user.photos.small : userPhoto} alt="" />
                         </div>
                         <div>
                             {user.followed ?
@@ -30,12 +31,12 @@ if(props.usersPage.users.length=== 0){
                     </span>
                     <span>
                         <span>
-                            <div>{user.fullName}</div>
+                            <div>{user.name}</div>
                             <div>{user.status}</div>
                         </span>
                         <span>
-                            <div>{user.location.country}</div>
-                            <div>{user.location.city}</div>
+                            <div>{'Belarus'}</div>
+                            <div>{'Minsk'}</div>
                         </span>
                     </span>
                 </div>)

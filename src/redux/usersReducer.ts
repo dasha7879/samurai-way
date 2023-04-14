@@ -5,15 +5,25 @@ const SET_USERS = 'SETUSERS'
 
 
 export type UserType = {
-    id: string
-    photoUrl:string
-    followed: boolean
-    fullName: string
-    status: string
-    location: {
-        country: string
-        city: string
-    }
+    // id: string
+    // photoUrl:string
+    // followed: boolean
+    // name: string
+    // status: string
+    // location: {
+    //     country: string
+    //     city: string
+    // }
+
+name: string,
+id: number,
+uniqueUrlName: null | string
+photos: {
+small: null | string
+large: null | string 
+},
+status: null | String
+followed: boolean
 }
 export type initialStateType = { 
     users: UserType[] 
@@ -45,10 +55,10 @@ type FollowType = ReturnType<typeof followAC>
 type UnfollowType = ReturnType<typeof unFollowAC>
 type SetUsersType = ReturnType<typeof setUsersAC>
 
-export const followAC = (userId: string) => {
+export const followAC = (userId: number) => {
     return { type: FOLLOW, userId } as const
 }
-export const unFollowAC = (userId: string) => {
+export const unFollowAC = (userId: number) => {
     return { type: UNFOLLOW, userId } as const
 }
 export const setUsersAC = (users: UserType[]) => {
