@@ -8,8 +8,8 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
     let state = props.dialogsPage
 
-    let dialogsElement = state.dialogs.map(dialog => <DialogItem name={dialog.name} id={dialog.id} />)
-    let messagesElement = state.messages.map((message) => { return <Message id={message.id} textMessage={message.textMessage} /> })
+    let dialogsElement = state.dialogs.map(dialog => <DialogItem key={dialog.id} name={dialog.name} id={dialog.id} />)
+    let messagesElement = state.messages.map((message) => <Message key={message.id} id={message.id} textMessage={message.textMessage} /> )
     let newMessage = state.newMessageText;
 
     let sendMessage = () => {
@@ -23,7 +23,7 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
     return (
 
         <div className={s.dialogs}>
-            <div className={s.dialogsItems}>
+            <div  className={s.dialogsItems}>
                 {dialogsElement}
             </div>
             <div className={s.messages}>
