@@ -65,30 +65,30 @@ export const usersReducer = (state = initialState, action: ActionsType): initial
     }
 }
 
-type ActionsType = FollowType | UnfollowType | SetUsersType |  SetCurrentPageACType | setTotalUsersCountACType | setIsFetchingACType
+type ActionsType = FollowType | UnfollowType | SetUsersType |  SetCurrentPageType | setTotalUsersCountType | setIsFetchingType
 
-type FollowType = ReturnType<typeof followAC>
-type UnfollowType = ReturnType<typeof unFollowAC>
-type SetUsersType = ReturnType<typeof setUsersAC>
-type SetCurrentPageACType = ReturnType<typeof setCurrentPageAC>
-type setTotalUsersCountACType = ReturnType<typeof setTotalUsersCountAC>
-type setIsFetchingACType = ReturnType<typeof setIsFetchingAC>
+type FollowType = ReturnType<typeof follow>
+type UnfollowType = ReturnType<typeof unFollow>
+type SetUsersType = ReturnType<typeof setUsers>
+type SetCurrentPageType = ReturnType<typeof setCurrentPage>
+type setTotalUsersCountType = ReturnType<typeof setTotalUsersCount>
+type setIsFetchingType = ReturnType<typeof setIsFetching>
 
-export const followAC = (userId: number) => {
+export const follow = (userId: number) => {
     return { type: FOLLOW, userId } as const
 }
-export const unFollowAC = (userId: number) => {
+export const unFollow = (userId: number) => {
     return { type: UNFOLLOW, userId } as const
 }
-export const setUsersAC = (users: UserType[]) => {
+export const setUsers = (users: UserType[]) => {
     return { type: SET_USERS, users } as const
 }
-export const setCurrentPageAC = (currentPage:number) => {
+export const setCurrentPage = (currentPage:number) => {
     return { type:  SET_CURRENT_PAGE , currentPage} as const
 }
-export const setTotalUsersCountAC = (totalCount:number) => {
+export const setTotalUsersCount = (totalCount:number) => {
     return { type: SET_TOTAL_USERS_COUNT ,totalCount} as const
 }
-export const setIsFetchingAC = (isFetching:boolean) => {
+export const setIsFetching = (isFetching:boolean) => {
     return { type: TOGGLE_IS_FETCHING, isFetching} as const
 }
