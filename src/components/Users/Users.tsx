@@ -3,6 +3,7 @@ import axios from 'axios';
 import s from './users.module.css';
 import userPhoto from '../../assets/images/User-Profile-PNG-High-Quality-Image.png';
 import { initialStateType } from '../../redux/usersReducer';
+import { NavLink } from 'react-router-dom';
 
 type UsersType = {
     usersPage: initialStateType;
@@ -33,11 +34,13 @@ const Users: React.FC<UsersType> = (props) => {
                 <div key={user.id}>
                     <span>
                         <div>
+                            <NavLink to={`/profile/${user.id}`}>
                             <img
                                 className={s.userPhoto}
                                 src={user.photos.small != null ? user.photos.small : userPhoto}
                                 alt=""
                             />
+                            </NavLink>
                         </div>
                         <div>
                             {user.followed ? (

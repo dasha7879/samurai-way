@@ -8,33 +8,33 @@ import { RouteComponentProps, withRouter } from "react-router-dom";
 
 
 
-// export type profileStateType = {
-//     aboutMe: string
-//     contacts: {
-//         facebook: string
-//         website: null | string,
-//         vk: string,
-//         twitter: string
-//         instagram: string
-//         youtube: null | string,
-//         github: string
-//         mainLink: null | string
-//     },
-//     lookingForAJob: boolean
-//     lookingForAJobDescription: string,
-//     fullName: string
-//     userId: number
-//     photos: {
-//         small: string
-//         large: string
-//     }
-// }
+export type profileStateType = {
+    aboutMe: string
+    contacts: {
+        facebook: string
+        website: null | string,
+        vk: string,
+        twitter: string
+        instagram: string
+        youtube: null | string,
+        github: string
+        mainLink: null | string
+    },
+    lookingForAJob: boolean
+    lookingForAJobDescription: string,
+    fullName: string
+    userId: number
+    photos: {
+        small: string
+        large: string
+    }
+}
 type mapStateToPropsType = {
-    profile: any
+    profile: profileStateType
 }
 
 type mapDispatchToPropsType = {
-    setUserProfile: (profile: any) => void
+    setUserProfile: (profile: profileStateType) => void
 
 }
 
@@ -51,17 +51,19 @@ class ProfileContainer extends React.Component<PropsType> {
         if(!userId){
             userId = "2"
         }
+
         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`).then((response) => {
-            this.props.setUserProfile(response.data);
-            console.log("kuku")
             console.log(response.data)
+            this.props.setUserProfile(response.data);
+            // console.log("kuku")
+            
         });
     }
 
     render() {
         return (
             <div>
-                <Profile {...this.props} profile={this.props.profile} />
+                <Profile {...this.props} />
             </div>
         )
     }
