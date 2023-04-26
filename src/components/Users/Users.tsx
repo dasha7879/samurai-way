@@ -1,24 +1,25 @@
 import React from 'react';
-import axios from 'axios';
 import s from './users.module.css';
 import userPhoto from '../../assets/images/User-Profile-PNG-High-Quality-Image.png';
 import { initialStateType } from '../../redux/usersReducer';
 import { NavLink } from 'react-router-dom';
+import axios from 'axios';
+import { follow, unFollow } from '../../api/api';
 
 type UsersType = {
     usersPage: initialStateType;
     pageSize: number,
     totalUsersCount: number,
     currentPage: number,
-    onPageChanged:(p:number) => void,
-    follow:(userId: number)=>void
-    unfollow: (userId: number)=>void
+    onPageChanged: (p: number) => void,
+    follow: (userId: number) => void
+    unfollow: (userId: number) => void
 }
 const Users: React.FC<UsersType> = (props) => {
     let pagesCount = Math.ceil(props.usersPage.totalUserCount / props.usersPage.pageSize)
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {
-      pages.push(i)
+        pages.push(i)
     }
 
     return (
@@ -26,7 +27,7 @@ const Users: React.FC<UsersType> = (props) => {
             <div>
                 {
                     pages.map(p => {
-                        return <span className={props.usersPage.currentPage === p ? s.selectedPage : s.page} onClick={() => {props.onPageChanged(p)}}>{p}</span>
+                        return <span className={props.usersPage.currentPage === p ? s.selectedPage : s.page} onClick={() => { props.onPageChanged(p) }}>{p}</span>
                     })
                 }
             </div>
@@ -35,18 +36,32 @@ const Users: React.FC<UsersType> = (props) => {
                     <span>
                         <div>
                             <NavLink to={`/profile/${user.id}`}>
-                            <img
-                                className={s.userPhoto}
-                                src={user.photos.small != null ? user.photos.small : userPhoto}
-                                alt=""
-                            />
+                                <img
+                                    className={s.userPhoto}
+                                    src={user.photos.small != null ? user.photos.small : userPhoto}
+                                    alt=""
+                                />
                             </NavLink>
                         </div>
                         <div>
                             {user.followed ? (
-                                <button onClick={() => props.unfollow(user.id)}> Unfollow </button>
+                                <button onClick={() => {
+                                    follow(user.id).then((data) => {
+                                        if (data.resultCode === 0) {
+                                            props.unfollow(user.id)
+                                        }
+                                    })
+                                }
+                                }>
+                                     Unfollow </button>
                             ) : (
-                                <button onClick={() => props.follow(user.id)}> follow</button>
+                                <button onClick={() => {
+                                    unFollow(user.id).then((data) => {
+                                        if (data.resultCode === 0) {
+                                            props.follow(user.id)
+                                        }
+                                    })
+                                }}> follow</button>
                             )}
                         </div>
                     </span>
@@ -65,7 +80,7 @@ const Users: React.FC<UsersType> = (props) => {
         </div>
     );
 }
-  
+
 
 export default Users;
 

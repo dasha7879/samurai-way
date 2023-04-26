@@ -53,10 +53,7 @@ class ProfileContainer extends React.Component<PropsType> {
         }
 
         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`).then((response) => {
-            console.log(response.data)
-            this.props.setUserProfile(response.data);
-            // console.log("kuku")
-            
+            this.props.setUserProfile(response.data);            
         });
     }
 
