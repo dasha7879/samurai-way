@@ -13,6 +13,10 @@ type usersAPIType = {
   getUsers: (currentPage: number, pageSize: number) => any
   follow: (userId: number) => any
   unFollow: (userId: number) => any
+  getProfile: (userId: number) => any
+};
+type authAPIType = {
+ me:()=>any
 };
 
 export const usersAPI: usersAPIType = {
@@ -24,7 +28,16 @@ export const usersAPI: usersAPIType = {
   },
   unFollow(userId: number) {
     return instance.post(`follow/${userId}`).then(response => response.data)
+  },
+  getProfile(userId: number) {
+    return instance.get(`profile/${userId}`).then(response => response.data)
   }
 
 }
 
+export const authAPI: authAPIType = {
+  me() {
+    return instance.get('auth/me').then(response =>response.data)
+  }
+
+}
