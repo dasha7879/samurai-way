@@ -22,7 +22,8 @@ export const authReducer = (state = initialState, action: setUserDataType): user
 
     switch (action.type) {
         case SET_USER_DATA:
-            return {...state,
+            return {
+                ...state,
                 ...action.data,
                 isAuth:true
             }
@@ -42,14 +43,15 @@ export const setUserData = (id: number, email: string, login: string) => {
 
 
 export const getUserData = ()=>(dispatch:Dispatch)=>{
-    authAPI.me().then((response:any)=>{
-        if(response.data.resultCode === 0 ){
-            let {id,email,login} = response.data.data
+    return authAPI.me().then((response:any)=>{
+         //типизация
+        if(response.resultCode === 0 ){
+            let {id,email,login} = response.data
                  dispatch(setUserData(id,email,login))
                 }
         console.log(response)
       })
-}
+} ///как переделать на async await
 // axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`,{withCredentials: true}).then((response) => {
 //     if(response.data.resultCode === 0 ){
 //         let {id,email,login} = response.data.data
